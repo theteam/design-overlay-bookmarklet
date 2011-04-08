@@ -1,0 +1,18 @@
+.design-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5000;
+}
+.design-overlay-controls {
+	position: absolute;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 300px;
+	background: #ccc;
+	z-index: 5001;
+	font-family: sans-serif;
+	font-size: 13px;
+	padding: 20px;
+}
