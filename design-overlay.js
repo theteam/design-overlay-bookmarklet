@@ -76,9 +76,9 @@
 			
 		$controls = $(
 			'<div class="design-overlay-controls">' +
-				'<div><label for="design-overlay-url">Image URL</label> <input id="design-overlay-url" type="url" class="design-overlay-text" /></div>' +
-				'<div><label for="design-overlay-opacity">Opacity</label> <div id="design-overlay-slider"></div></div>' +
-				'<div><input id="design-overlay-toggle" type="checkbox" class="checkbox" checked /> <label for="design-overlay-toggle">Enable</label></div>' +
+				'<div class="design-overlay-row"><label for="design-overlay-url">Image url</label> <input id="design-overlay-url" type="url" class="design-overlay-text" /></div>' +
+				'<div class="design-overlay-row"><label for="design-overlay-opacity">Opacity</label> <span id="design-overlay-slider"></span></div>' +
+				'<div class="design-overlay-row"><label for="design-overlay-toggle">Enable</label> <input id="design-overlay-toggle" type="checkbox" class="checkbox" checked /></div>' +
 			'</div>' +
 		'').appendTo(document.body);
 		

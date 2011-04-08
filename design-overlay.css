@@ -10,9 +10,29 @@
 	top: 0;
 	right: 0;
 	width: 300px;
-	background: #ccc;
+	background: #ddd;
 	z-index: 5001;
 	font-family: sans-serif;
 	font-size: 13px;
-	padding: 20px;
+	padding: 9px 20px;
+	color: #333;
+}
+.design-overlay-controls .ui-slider-handle {
+   outline: none;
+}
+.design-overlay-row {
+	margin: 10px 0;
+}
+.design-overlay-controls label {
+	display: inline-block;
+	width: 72px;
+	text-align: right;
+	margin: 0 10px 0 0;
+}
+.design-overlay-controls input.text {
+	width: 174px;
+}
+#design-overlay-slider {
+	display: inline-block;
+	width: 174px;
 }
