@@ -36,3 +36,6 @@
 	display: inline-block;
 	width: 174px;
 }
+.design-overlay-click-thru {
+	pointer-events: none;
+}
