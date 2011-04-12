@@ -1,3 +1,6 @@
+.do-test {
+	display: none;
+}
 .design-overlay {
 	position: absolute;
 	top: 0;

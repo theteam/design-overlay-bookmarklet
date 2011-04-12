@@ -1,10 +1,4 @@
 (function(window, document, undefined) {
-	function loadImg(url, callback) {
-		$('<img/>').load(function() {
-			callback(this);
-		}).attr('src', url);
-	}
-	
 	function init() {
 		var $ = jQuery,
 			$controls,
@@ -101,7 +95,13 @@
 					shown = false;
 				}
 			});
-		};
+		}
+		
+		function loadImg(url, callback) {
+			$('<img/>').load(function() {
+				callback(this);
+			}).attr('src', url);
+		}
 		
 		addFormEvents();
 		addControlIntentEvents();
@@ -111,12 +111,20 @@
 	// init() is called once everything is ready
 	(function() {
 		var head = document.getElementsByTagName('head')[0],
+			testElm = document.createElement('div'),
 			thisBasePath,
 			interval,
 			loadingJqui;
 		
+		testElm.className = 'do-test';
+		testElm.style.width = '200px';
+		document.body.appendChild(testElm);
+		
 		function isReady() {
-			return window.jQuery && jQuery.fn.draggable && jQuery.fn.slider;
+			return window.jQuery && hasJqui() && testElm.offsetWidth;
+		}
+		function hasJqui() {
+			return jQuery.fn.draggable && jQuery.fn.slider;
 		}
 		
 		function loadScript(url) {
@@ -132,41 +140,36 @@
 			head.appendChild(link);
 		}
 		
-		if ( isReady() ) {
-			init();
-		}
-		else {
-			thisBasePath = (function() {
-				var scripts = document.getElementsByTagName('script'),
-					i = scripts.length,
-					scriptSrc,
-					index
-					
-				while (i--) {
-					scriptSrc = scripts[i].src;
-					index = scriptSrc.indexOf('design-overlay.js');
-					if ( ~index ) {
-						return scriptSrc.slice(0, index);
-					}
+		thisBasePath = (function() {
+			var scripts = document.getElementsByTagName('script'),
+				i = scripts.length,
+				scriptSrc,
+				index
+				
+			while (i--) {
+				scriptSrc = scripts[i].src;
+				index = scriptSrc.indexOf('design-overlay.js');
+				if ( ~index ) {
+					return scriptSrc.slice(0, index);
 				}
-				throw Error('Could not find design-overlay script');
-			})();
-			
-			(!window.jQuery) && loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js');
-			loadCss( thisBasePath + 'design-overlay.css?' + new Date().valueOf() );
-			
-			// extremely crude loading...
-			interval = setInterval(function() {
-				if ( isReady() ) {
-					clearInterval(interval);
-					$(init);
-				}
-				else if (window.jQuery && !loadingJqui) {
-					loadingJqui = true;
-					loadScript('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js');
-					loadCss('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/sunny/jquery-ui.css');
-				}
-			}, 200);
-		}
+			}
+			throw Error('Could not find design-overlay script');
+		})();
+		
+		(!window.jQuery) && loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js');
+		loadCss( thisBasePath + 'design-overlay.css?' + new Date().valueOf() );
+		
+		// extremely crude loading...
+		interval = setInterval(function() {
+			if ( isReady() ) {
+				clearInterval(interval);
+				$(init);
+			}
+			else if (window.jQuery && !hasJqui() && !loadingJqui) {
+				loadingJqui = true;
+				loadScript('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js');
+				loadCss('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/sunny/jquery-ui.css');
+			}
+		}, 200);
 	})();
 })(window, document, undefined);
