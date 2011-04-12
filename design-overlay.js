@@ -78,8 +78,8 @@
 			// initial closed position
 			$controls.css( 'top', closedPosition() );
 			
-			// show the menu on click
-			$controls.mouseup(function() {
+			// show the menu on hover
+			$controls.mouseover(function() {
 				if (!shown) {					
 					$controls.stop(true).animate({
 						top: 0
@@ -90,6 +90,7 @@
 				}
 			})
 			
+			// hide on click outside
 			$( document ).mousedown(function(event) {
 				if (shown && !$(event.target).closest('.do-controls')[0] ) {
 					$controls.stop(true).animate({
