@@ -18,42 +18,85 @@
 			$overlay = $('<div class="design-overlay"/>').appendTo(document.body).draggable().css( 'opacity', conf.opacity );
 		
 		$controls = $(
-			'<div class="design-overlay-controls">' +
-				'<div class="design-overlay-row"><label for="design-overlay-url">Image url</label> <input id="design-overlay-url" type="url" class="design-overlay-text" /></div>' +
-				'<div class="design-overlay-row"><label for="design-overlay-opacity">Opacity</label> <span id="design-overlay-slider"></span></div>' +
-				'<div class="design-overlay-row"><label for="design-overlay-toggle">Enable</label> <input id="design-overlay-toggle" type="checkbox" class="checkbox" value="1" checked /></div>' +
-				'<div class="design-overlay-row"><label for="design-overlay-click-thru">Click-thru</label> <input id="design-overlay-click-thru" type="checkbox" value="1" class="checkbox" /></div>' +
+			'<div class="do-controls">' +
+				'<div class="do-row"><label for="do-url">Image url</label> <input id="do-url" type="url" class="do-text" /></div>' +
+				'<div class="do-row"><label for="do-opacity">Opacity</label> <span id="do-slider"></span></div>' +
+				'<div class="do-row"><label for="do-toggle">Enable</label> <input id="do-toggle" type="checkbox" class="checkbox" value="1" checked /></div>' +
+				'<div class="do-row do-click-thru-row"><label for="do-click-thru">Click-thru</label> <input id="do-click-thru" type="checkbox" value="1" class="checkbox" /></div>' +
+				'<div class="do-footer">Design overlay</div>' +
 			'</div>' +
 		'').appendTo(document.body);
 		
-		$('#design-overlay-url').change(function() {
-			loadImg(this.value, function(img) {
-				$overlay.css({
-					'background-image': 'url(' + img.src + ')',
-					top: 0,
-					left: ( $(window).width() - img.width ) / 2,
-					width: img.width,
-					height: img.height
-				});
-			});
-		}).val( conf.url ).trigger('change');
-		
-		$slider = $('#design-overlay-slider').slider({
+		// add jquery ui slider
+		$slider = $('#do-slider').slider({
 			min: 0,
 			max: 1,
 			step: 0.01,
 			value: conf.opacity
-		}).bind('slide', function(event, ui) {
-			$overlay.css( 'opacity', ui.value );
 		});
 		
-		$('#design-overlay-click-thru').change(function() {
-			$overlay[this.checked ? 'addClass' : 'removeClass']('design-overlay-click-thru');
-		}).val( Number(conf.enabled) ).trigger('change');
+		function addFormEvents() {
+			$slider.bind('slide', function(event, ui) {
+				$overlay.css( 'opacity', ui.value );
+			});
+			
+			$('#do-url').change(function() {
+				loadImg(this.value, function(img) {
+					$overlay.css({
+						'background-image': 'url(' + img.src + ')',
+						top: 0,
+						left: ( $(window).width() - img.width ) / 2,
+						width: img.width,
+						height: img.height
+					});
+				});
+			}).val( conf.url ).trigger('change');
+						
+			$('#do-toggle').change(function() {
+				$overlay[this.checked ? 'show' : 'hide']();
+			}).val( Number(conf.enabled) ).trigger('change');
+			
+			$('#do-click-thru').change(function() {
+				$overlay[this.checked ? 'addClass' : 'removeClass']('do-click-thru');
+			}).val( Number(conf.enabled) ).trigger('change');
+			
+			// detect support for pointer events, click-thru won't be used without it
+			if ('pointerEvents' in $overlay[0].style) {
+				$overlay.addClass('do-pointer-events');
+			}
+		}
 		
-		$('#design-overlay-toggle').change(function() {
-			$overlay[this.checked ? 'show' : 'hide']();
-		}).val( Number(conf.enabled) ).trigger('change');
+		// make the controls show & hide on mouse enter & leave
+		var addControlIntentEvents = (function() {
+			var $footer = $controls.find('div.do-footer');
+			
+			function closedPosition() {
+				return -$controls.outerHeight() + $footer.outerHeight();
+			}
+			
+			return function addControlIntentEvents() {
+				// initial closed position
+				$controls.css( 'top', closedPosition() );
+				
+				// todo: switch these for hover intent?
+				$controls.mouseenter(function() {
+					$controls.stop(true).animate({
+						top: 0
+					}, {
+						duration: 250
+					});
+				}).mouseleave(function() {
+					$controls.stop(true).animate({
+						top: closedPosition()
+					}, {
+						duration: 250
+					});
+				});
+			};
+		})();
+		
+		addFormEvents();
+		addControlIntentEvents();
 	}
 	
 	// check that everything we need has loaded. Otherwise load it in.
