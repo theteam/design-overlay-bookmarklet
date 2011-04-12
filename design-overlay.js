@@ -67,33 +67,40 @@
 		}
 		
 		// make the controls show & hide on mouse enter & leave
-		var addControlIntentEvents = (function() {
-			var $footer = $controls.find('div.do-footer');
+		function addControlIntentEvents() {
+			var $footer = $controls.find('div.do-footer'),
+				shown;
 			
 			function closedPosition() {
 				return -$controls.outerHeight() + $footer.outerHeight();
 			}
+
+			// initial closed position
+			$controls.css( 'top', closedPosition() );
 			
-			return function addControlIntentEvents() {
-				// initial closed position
-				$controls.css( 'top', closedPosition() );
-				
-				// todo: switch these for hover intent?
-				$controls.mouseenter(function() {
+			// show the menu on click
+			$controls.mouseup(function() {
+				if (!shown) {					
 					$controls.stop(true).animate({
 						top: 0
 					}, {
 						duration: 250
 					});
-				}).mouseleave(function() {
+					shown = true;
+				}
+			})
+			
+			$( document ).mousedown(function(event) {
+				if (shown && !$(event.target).closest('.do-controls')[0] ) {
 					$controls.stop(true).animate({
 						top: closedPosition()
 					}, {
 						duration: 250
 					});
-				});
-			};
-		})();
+					shown = false;
+				}
+			});
+		};
 		
 		addFormEvents();
 		addControlIntentEvents();
