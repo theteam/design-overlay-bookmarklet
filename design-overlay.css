@@ -44,6 +44,9 @@
 .do-controls label::after {
 	content: ':';
 }
+.do-controls input {
+	vertical-align: middle;
+}
 .do-controls input.do-text {
 	padding: 4px 5px;
 	width: 191px;
