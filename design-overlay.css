@@ -17,8 +17,13 @@
 	z-index: 5001;
 	font-family: sans-serif;
 	font-size: 13px;
-	padding: 9px 20px 25px;
+	padding: 9px 20px 34px;
 	color: #333;
+	
+	-webkit-box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+	-moz-box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+	-o-box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+	box-shadow: 0 3px 4px rgba(0,0,0,0.4);
 }
 .do-controls .ui-slider-handle {
    outline: none;
@@ -32,12 +37,43 @@
 	text-align: right;
 	margin: 0 10px 0 0;
 }
-.do-controls input.text {
-	width: 174px;
+.do-controls label::after {
+	content: ':';
+}
+.do-controls input.do-text {
+	padding: 4px 5px;
+	width: 191px;
+	border: 1px solid #bbb;
+	
+	-moz-box-shadow: 0 3px 5px rgba(0,0,0,0.12) inset;
+	-o-box-shadow: 0 3px 5px rgba(0,0,0,0.12) inset;
+	-webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.12) inset;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.12) inset;
 }
 #do-slider {
 	display: inline-block;
-	width: 174px;
+	width: 200px;
+	vertical-align: middle;
+	border-radius: 0;
+	border: 1px solid #bbb;
+	
+	background: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff));
+	background: -moz-linear-gradient(-90deg, #f0eff0, #ccc);
+	background: linear-gradient(-90deg, #f0eff0, #ccc);
+}
+#do-slider .ui-slider-handle {
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #ccc;
+	border: 1px solid #888;
+	width: 0.7em;
+	margin-left: -.35em;
+	
+	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.12);
+	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.12);
+	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.12);
+	box-shadow: 0 2px 2px rgba(0,0,0,0.12);
 }
 .do-click-thru {
 	pointer-events: none;
@@ -53,4 +89,19 @@
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	padding: 5px 5px 5px 25px;
+	color: #666;
+	
+	background: -webkit-gradient(linear, left top, left bottom, from(#f0eff0), to(#ccc));
+	background: -moz-linear-gradient(-90deg, #f0eff0, #ccc);
+	background: linear-gradient(-90deg, #f0eff0, #ccc);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#f0eff0, endColorstr=#cccccc);
+}
+.do-footer::before {
+	content: ': : :';
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	word-spacing: -3px;
+	color: rgba(0,0,0,0.4);
 }
