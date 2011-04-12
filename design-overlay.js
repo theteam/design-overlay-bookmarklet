@@ -16,7 +16,7 @@
 				'<div class="do-row"><label for="do-url">Image url</label> <input id="do-url" type="url" class="do-text" /></div>' +
 				'<div class="do-row"><label for="do-opacity">Opacity</label> <span id="do-slider"></span></div>' +
 				'<div class="do-row do-toggle-row"><label for="do-toggle">Show</label> <input id="do-toggle" type="checkbox" class="checkbox" value="1" checked /></div>' +
-				'<div class="do-row do-click-thru-row"><label for="do-click-thru">Click-thru</label> <input id="do-click-thru" type="checkbox" value="1" class="checkbox" /></div>' +
+				'<div class="do-row do-click-thru-row"><label for="do-click-thru" title="Pass mouse events through to elements beneath the overlay">Click-thru</label> <input id="do-click-thru" type="checkbox" value="1" class="checkbox" /></div>' +
 				'<div class="do-footer">Design overlay</div>' +
 			'</div>' +
 		'').appendTo(document.body);

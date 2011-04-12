@@ -12,12 +12,11 @@
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: 300px;
-	background: #ddd;
+	width: 322px;
+	background: #E6E6E6;
 	z-index: 5001;
 	font-family: sans-serif;
 	font-size: 13px;
-	padding: 9px 20px 34px;
 	color: #333;
 	
 	-webkit-box-shadow: 0 3px 4px rgba(0,0,0,0.4);
@@ -28,14 +27,19 @@
 .do-controls .ui-slider-handle {
    outline: none;
 }
-.do-row {
-	margin: 10px 0;
+.do-row:nth-child(even) {
+	background: #eee;
 }
 .do-controls label {
 	display: inline-block;
 	width: 72px;
 	text-align: right;
 	margin: 0 10px 0 0;
+	padding: 14px 10px;
+	background: #DDEDFD;
+}
+.do-controls .do-row:nth-child(even) label {
+	background: #F0F6FF;
 }
 .do-controls label::after {
 	content: ':';
@@ -85,17 +89,15 @@
 	display: block;
 }
 .do-footer {
-	width: 340px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	padding: 5px 5px 5px 25px;
+	text-align: right;
+	position: relative;
+	padding: 5px 10px 5px 25px;
 	color: #666;
 	
-	background: -webkit-gradient(linear, left top, left bottom, from(#f0eff0), to(#ccc));
-	background: -moz-linear-gradient(-90deg, #f0eff0, #ccc);
-	background: linear-gradient(-90deg, #f0eff0, #ccc);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#f0eff0, endColorstr=#cccccc);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFAFA), to(#ccc));
+	background: -moz-linear-gradient(-90deg, #FFFAFA, #ccc);
+	background: linear-gradient(-90deg, #FFFAFA, #ccc);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FFFAFA, endColorstr=#cccccc);
 }
 .do-footer::before {
 	content: ': : :';
