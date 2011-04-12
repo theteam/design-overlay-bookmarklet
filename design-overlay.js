@@ -61,8 +61,8 @@
 			}).val( Number(conf.enabled) ).trigger('change');
 			
 			// detect support for pointer events, click-thru won't be used without it
-			if ('pointerEvents' in $overlay[0].style) {
-				$overlay.addClass('do-pointer-events');
+			if ('pointerEvents' in $controls[0].style) {
+				$controls.addClass('do-pointer-events');
 			}
 		}
 		
