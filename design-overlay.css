@@ -103,10 +103,10 @@
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FFFAFA, endColorstr=#cccccc);
 }
 .do-footer::before {
-	content: ': : :';
+	content: ':::';
 	position: absolute;
 	top: 4px;
 	left: 4px;
-	word-spacing: -3px;
+	letter-spacing: 1px;
 	color: rgba(0,0,0,0.4);
 }
