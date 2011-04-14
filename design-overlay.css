@@ -6,7 +6,12 @@
 	top: 0;
 	left: 0;
 	z-index: 5000;
+	cursor: url(imgs/openhand.cur), default;
 }
+.design-overlay.ui-draggable-dragging {
+	cursor: url(imgs/closedhand.cur), default;
+}
+
 .do-controls {
 	position: absolute;
 	position: fixed;
@@ -66,8 +71,8 @@
 	
 	background: #fff;
 	background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff));
-	background: -moz-linear-gradient(-90deg, #f0eff0, #ccc);
-	background: linear-gradient(-90deg, #f0eff0, #ccc);
+	background: -moz-linear-gradient(-90deg, #ddd, #fff);
+	background: linear-gradient(-90deg, #ddd, #fff);
 }
 #do-slider .ui-slider-handle {
 	-moz-border-radius: 4px;
