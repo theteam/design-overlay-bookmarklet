@@ -97,6 +97,35 @@
 			});
 		}
 		
+		function addOverlayKeyEvents() {
+			var style = $overlay[0].style;
+			
+			$overlay.attr({
+				tabindex: -1,
+				hidefocus: 'true'
+			}).mousedown(function() {
+				this.focus();
+			}).keydown(function(event) {
+				var amount = event.shiftKey ? 10 : 1;
+				
+				// nudge keys
+				switch( event.which ) {
+					case 37: // left
+						style.left = parseFloat( style.left ) - amount + 'px';
+						return false;
+					case 38: // up
+						style.top = parseFloat( style.top ) - amount + 'px';
+						return false;
+					case 39: // right
+						style.left = parseFloat( style.left ) + amount + 'px';
+						return false;
+					case 40: // down
+						style.top = parseFloat( style.top ) + amount + 'px';
+						return false;
+				}
+			});
+		}
+		
 		function loadImg(url, callback) {
 			$('<img/>').load(function() {
 				callback(this);
@@ -105,6 +134,7 @@
 		
 		addFormEvents();
 		addControlIntentEvents();
+		addOverlayKeyEvents();
 	}
 	
 	// check that everything we need has loaded. Otherwise load it in.

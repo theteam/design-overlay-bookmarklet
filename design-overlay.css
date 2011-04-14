@@ -7,6 +7,7 @@
 	left: 0;
 	z-index: 5000;
 	cursor: url(imgs/openhand.cur), default;
+	outline: none;
 }
 .design-overlay.ui-draggable-dragging {
 	cursor: url(imgs/closedhand.cur), default;
