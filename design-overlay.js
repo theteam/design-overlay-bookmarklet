@@ -135,7 +135,7 @@
 				$.each(conf.url, function(i, url) {
 					var optionText = url.length > optionTextLen ? '...' + url.slice(-optionTextLen) : url;
 					
-					$('<option/>').attr('value', url).text( url.slice(optionText) ).appendTo( $select );
+					$('<option/>').attr('value', url).text(optionText).appendTo( $select );
 				});
 				
 				// allow double click on label to revert to text input
