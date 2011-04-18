@@ -13,7 +13,7 @@
 		
 		$controls = $(
 			'<div class="do-controls">' +
-				'<div class="do-row"><label for="do-url">Image url</label> <input id="do-url" type="url" class="do-text" /></div>' +
+				'<div class="do-row"><label for="do-url" id="do-url-label">Image url</label> <input id="do-url" type="url" class="do-text" /> <select id="do-url-select"></select></div>' +
 				'<div class="do-row"><label for="do-opacity">Opacity</label> <span id="do-slider"></span></div>' +
 				'<div class="do-row do-toggle-row"><label for="do-toggle">Show</label> <input id="do-toggle" type="checkbox" class="checkbox" value="1" checked /></div>' +
 				'<div class="do-row do-click-thru-row"><label for="do-click-thru" title="Pass mouse events through to elements beneath the overlay">Click-thru</label> <input id="do-click-thru" type="checkbox" value="1" class="checkbox" /></div>' +
@@ -34,8 +34,8 @@
 				$overlay.css( 'opacity', ui.value );
 			});
 			
-			$('#do-url').change(function() {
-				loadImg(this.value, function(img) {
+			$('#do-url, #do-url-select').change(function() {
+				loadImg( $(this).val(), function(img) {
 					$overlay.css({
 						'background-image': 'url(' + img.src + ')',
 						top: 0,
@@ -44,7 +44,7 @@
 						height: img.height
 					});
 				});
-			}).val( conf.url ).trigger('change');
+			}).eq(0).val( $.isArray(conf.url) ? conf.url[0] : conf.url ).trigger('change');
 						
 			$('#do-toggle').change(function() {
 				$overlay[this.checked ? 'show' : 'hide']();
@@ -126,12 +126,34 @@
 			});
 		}
 		
+		function addUrlSelect() {
+			if ( $.isArray(conf.url) ) {
+				var $select = $('#do-url-select').show(),
+					$urlInput = $('#do-url').hide(),
+					optionTextLen = 30;
+					
+				$.each(conf.url, function(i, url) {
+					var optionText = url.length > optionTextLen ? '...' + url.slice(-optionTextLen) : url;
+					
+					$('<option/>').attr('value', url).text( url.slice(optionText) ).appendTo( $select );
+				});
+				
+				// allow double click on label to revert to text input
+				$('#do-url-label').one('dblclick', function(event) {
+					$select.hide();
+					$urlInput.val( $select.val() ).show()[0].focus();
+					return false;
+				});
+			}
+		}
+		
 		function loadImg(url, callback) {
 			$('<img/>').load(function() {
 				callback(this);
 			}).attr('src', url);
 		}
 		
+		addUrlSelect();
 		addFormEvents();
 		addControlIntentEvents();
 		addOverlayKeyEvents();

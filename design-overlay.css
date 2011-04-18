@@ -58,7 +58,7 @@
 	.do-controls input {
 		vertical-align: middle;
 	}
-	.do-controls input.do-text {
+	.do-controls input.do-text, #do-url-select {
 		padding: 4px 5px;
 		width: 191px;
 		border: 1px solid #bbb;
@@ -67,6 +67,9 @@
 		-o-box-shadow: 0 3px 5px rgba(0,0,0,0.12) inset;
 		-webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.12) inset;
 		box-shadow: 0 3px 5px rgba(0,0,0,0.12) inset;
+	}
+	#do-url-select {
+		display: none;
 	}
 	#do-slider {
 		display: inline-block;
