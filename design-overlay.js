@@ -130,7 +130,7 @@
 			if ( $.isArray(conf.url) ) {
 				var $select = $('#do-url-select').show(),
 					$urlInput = $('#do-url').hide(),
-					optionTextLen = 30;
+					optionTextLen = 20;
 					
 				$.each(conf.url, function(i, url) {
 					var optionText = url.length > optionTextLen ? '...' + url.slice(-optionTextLen) : url;
